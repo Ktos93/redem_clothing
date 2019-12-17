@@ -29,109 +29,109 @@ RegisterNetEvent('redem_clothing:sex')
 AddEventHandler('redem_clothing:sex', function(skin)
 local _skin = json.decode(skin)
 local sex = 1
-	if _skin.sex == "male" then
-	sex = 1
-	sex_global = sex
-	else
-	sex = 2
-	sex_global = sex
-	end
-	startUI(sex)
-	SetNuiFocus(true, true)
-	 Citizen.InvokeNative(0xD710A5007C2AC539, PlayerPedId(), 0x662AC34, 0) -- Set target category, here the hash is for hats
-	 Citizen.InvokeNative(0xCC8CA3E88256E58F, PlayerPedId(), 0, 1, 1, 1, 0) -- Actually remove the component
+if _skin.sex == "male" then
+  sex = 1
+  sex_global = sex
+else
+  sex = 2
+  sex_global = sex
+end
+startUI(sex)
+SetNuiFocus(true, true)
+Citizen.InvokeNative(0xD710A5007C2AC539, PlayerPedId(), 0x662AC34, 0) -- Set target category, here the hash is for hats
+Citizen.InvokeNative(0xCC8CA3E88256E58F, PlayerPedId(), 0, 1, 1, 1, 0) -- Actually remove the component
 end)
 
-function startUI(sex) 
-local sex1 = sex
-	SendNUIMessage({
-		type = "ui",
-		display = true,
-		sex3 = sex1
-	})
+function startUI(sex)
+  local sex1 = sex
+  SendNUIMessage({
+    type = "ui",
+    display = true,
+    sex3 = sex1
+  })
 end
 
-function hideUI() 
-	SendNUIMessage({
-		type = "ui",
-		display = false
+function hideUI()
+  SendNUIMessage({
+    type = "ui",
+    display = false
 
-	})
+  })
 end
 
 
 RegisterCommand('clothing', function(source, args)
-  TriggerServerEvent("redem_clothing:sex_test", function(cb)
-	 end)
- 
+TriggerServerEvent("redem_clothing:sex_test", function(cb)
+end)
+
 end)
 RegisterCommand('clothing_close', function(source, args)
-hideUI() 
- SetNuiFocus(false, false)
+hideUI()
+SetNuiFocus(false, false)
 end)
 
 RegisterNUICallback('Save', function(data, cb)
 SetNuiFocus(false, false)
 local elementy = {
-["kapelusz"] = data.kapelusz,
-["koszula"] = data.koszula,
-["kamizelka"] = data.kamizelka,
-["spodnie"] = data.spodnie,
-["maska"] = data.maska,
-["buty"] = data.buty,
-["spodnica"] = data.spodnica
+  ["kapelusz"] = data.kapelusz,
+  ["koszula"] = data.koszula,
+  ["kamizelka"] = data.kamizelka,
+  ["spodnie"] = data.spodnie,
+  ["maska"] = data.maska,
+  ["buty"] = data.buty,
+  ["spodnica"] = data.spodnica
 
 }
---print("tak1")	
-			
-			local json = json.encode(elementy)
-			TriggerServerEvent("redem_clothing:Save", json, function(cb)
-				if cb then
-			--	print("DONE")
-				else
-			--	print("ERROR")
-				end
-			end)
-		--	print("tak2")	
+--print("tak1")
+
+local json = json.encode(elementy)
+TriggerServerEvent("redem_clothing:Save", json, function(cb)
+if cb then
+  --	print("DONE")
+else
+  --	print("ERROR")
+end
+end)
+--	print("tak2")
 
 end)
 
 
 RegisterNUICallback('komponent', function(component)
 if sex_global == 1 then
-if component == "kapelusz" then
-glowna = lista_kapelusze
-kapelusz_del = 2
-elseif component == "koszula" then
-glowna = lista_koszula
-elseif component == "kamizelka" then
-glowna = lista_kamizelka
-elseif component == "spodnie" then
-glowna = lista_spodnie
-elseif component == "maska" then
-glowna = lista_maska
-maska_del = 2
-elseif component == "buty" then
-glowna = lista_buty
-end
+  if component == "kapelusz" then
+    glowna = lista_kapelusze
+    kapelusz_del = 2
+  elseif component == "koszula" then
+    glowna = lista_koszula
+  elseif component == "kamizelka" then
+    glowna = lista_kamizelka
+  elseif component == "spodnie" then
+    glowna = lista_spodnie
+  elseif component == "maska" then
+    glowna = lista_maska
+    maska_del = 2
+  elseif component == "buty" then
+    glowna = lista_buty
+  end
 
-elseif sex_global == 2 then 
-if component == "kapelusz" then
-glowna = lista_kapelusze_f
-elseif component == "koszula" then
-glowna = lista_koszula_f
-elseif component == "kamizelka" then
-glowna = lista_kamizelka_f
-elseif component == "spodnie" then
-glowna = lista_spodnie_f
-elseif component == "maska" then
-glowna = lista_maska_f
-elseif component == "buty" then
-glowna = lista_buty_f
-elseif component == "spodnica" then
-glowna = lista_spodnica
+elseif sex_global == 2 then
+  if component == "kapelusz" then
+    glowna = lista_kapelusze_f
+  elseif component == "koszula" then
+    glowna = lista_koszula_f
+  elseif component == "kamizelka" then
+    glowna = lista_kamizelka_f
+  elseif component == "spodnie" then
+    glowna = lista_spodnie_f
+  elseif component == "maska" then
+    glowna = lista_maska_f
+  elseif component == "buty" then
+    glowna = lista_buty_f
+  elseif component == "spodnica" then
+    glowna = lista_spodnica
 
-	end
+  end
 end
 
 
@@ -145,24 +145,24 @@ local wartosc2 = tonumber(wartosc)
 
 local hash = ("0x" .. glowna[wartosc2])
 if (glowna == lista_maska_f or glowna == lista_maska) and wartosc2 == 1 then
-	 Citizen.InvokeNative(0xD710A5007C2AC539, PlayerPedId(), 0x7505EF42, 0) -- Set target category, here the hash is for hats
-	--  Citizen.InvokeNative(0xCC8CA3E88256E58F, PlayerPedId(), 0, 1, 1, 1, 0) -- Actually remove the component
+  Citizen.InvokeNative(0xD710A5007C2AC539, PlayerPedId(), 0x7505EF42, 0) -- Set target category, here the hash is for hats
+  --  Citizen.InvokeNative(0xCC8CA3E88256E58F, PlayerPedId(), 0, 1, 1, 1, 0) -- Actually remove the component
 
 elseif (glowna == lista_kapelusze_f or glowna == lista_kapelusze) and wartosc2 == 1 then
-	  Citizen.InvokeNative(0xD710A5007C2AC539, PlayerPedId(), 0x9925C067, 0) -- Set target category, here the hash is for hats
-	--   Citizen.InvokeNative(0xCC8CA3E88256E58F, PlayerPedId(), 0, 1, 1, 1, 0) -- Actually remove the component
-	
+  Citizen.InvokeNative(0xD710A5007C2AC539, PlayerPedId(), 0x9925C067, 0) -- Set target category, here the hash is for hats
+  --   Citizen.InvokeNative(0xCC8CA3E88256E58F, PlayerPedId(), 0, 1, 1, 1, 0) -- Actually remove the component
+
 elseif glowna == lista_spodnie_f and wartosc2 == 1 then
-	 Citizen.InvokeNative(0xD710A5007C2AC539, PlayerPedId(), 0x1D4C528A, 0) -- Set target category, here the hash is for hats
-	 -- Citizen.InvokeNative(0xCC8CA3E88256E58F, PlayerPedId(), 0, 1, 1, 1, 0) -- Actually remove the component
+  Citizen.InvokeNative(0xD710A5007C2AC539, PlayerPedId(), 0x1D4C528A, 0) -- Set target category, here the hash is for hats
+  -- Citizen.InvokeNative(0xCC8CA3E88256E58F, PlayerPedId(), 0, 1, 1, 1, 0) -- Actually remove the component
 
- elseif glowna == lista_spodnica and wartosc2 == 1 then
-	  Citizen.InvokeNative(0xD710A5007C2AC539, PlayerPedId(), 0xA0E3AB7F, 0) -- Set target category, here the hash is for hats
-	  -- Citizen.InvokeNative(0xCC8CA3E88256E58F, PlayerPedId(), 0, 1, 1, 1, 0) -- Actually remove the component
+elseif glowna == lista_spodnica and wartosc2 == 1 then
+  Citizen.InvokeNative(0xD710A5007C2AC539, PlayerPedId(), 0xA0E3AB7F, 0) -- Set target category, here the hash is for hats
+  -- Citizen.InvokeNative(0xCC8CA3E88256E58F, PlayerPedId(), 0, 1, 1, 1, 0) -- Actually remove the component
 
- else
+else
 
-Citizen.InvokeNative(0xD3A7B003ED343FD9 , PlayerPedId(),  tonumber(hash), true, true, true)	
+  Citizen.InvokeNative(0xD3A7B003ED343FD9 , PlayerPedId(),  tonumber(hash), true, true, true)
 
 
 end
@@ -173,8 +173,8 @@ end)
 
 
 RegisterCommand("loadcloath", function(source, args)
-     TriggerServerEvent("redem_clothing:loadClothes", function(cb)
-	 end)
+TriggerServerEvent("redem_clothing:loadClothes", function(cb)
+end)
 end)
 
 RegisterNetEvent('redem_clothing:load')
@@ -186,127 +186,127 @@ local hash = nil
 local wartosc = 1
 --print (_skin.sex)
 
-	if _skin.sex == "male" then
-	sex = 1
-	else
-	sex = 2
-	end
-	if sex == 1 then
-glowna = lista_kapelusze
-wartosc = tonumber(_ubranie.kapelusz)
-if wartosc > 1 then
---print(wartosc)
-hash = ("0x" .. glowna[wartosc])
-ladowanie(hash)
---print("poszło1")
+if _skin.sex == "male" then
+  sex = 1
+else
+  sex = 2
 end
-Wait(200)
-glowna = lista_koszula
-wartosc = tonumber(_ubranie.koszula)
---print(wartosc)
-hash = ("0x" .. glowna[wartosc])
-ladowanie(hash)
---print("poszło2")
-Wait(200)
-glowna = lista_kamizelka
-wartosc = tonumber(_ubranie.kamizelka)
---print(wartosc)
-hash = ("0x" .. glowna[wartosc])
-ladowanie(hash)
---print("poszło3")
-Wait(200)
-glowna = lista_spodnie
-wartosc = tonumber(_ubranie.spodnie)
---print(wartosc)
-hash = ("0x" .. glowna[wartosc])
-ladowanie(hash)
---print("poszło4")
-Wait(200)
-glowna = lista_maska
-wartosc = tonumber(_ubranie.maska)
-if wartosc > 1 then
---print(wartosc)
-hash = ("0x" .. glowna[wartosc])
-ladowanie(hash)
---print("poszło5")
-end
-Wait(200)
-glowna = lista_buty
-wartosc = tonumber(_ubranie.buty)
---print(wartosc)
-hash = ("0x" .. glowna[wartosc])
-ladowanie(hash)
---print("poszło6")
+if sex == 1 then
+  glowna = lista_kapelusze
+  wartosc = tonumber(_ubranie.kapelusz)
+  if wartosc > 1 then
+    --print(wartosc)
+    hash = ("0x" .. glowna[wartosc])
+    ladowanie(hash)
+    --print("poszło1")
+  end
+  Wait(200)
+  glowna = lista_koszula
+  wartosc = tonumber(_ubranie.koszula)
+  --print(wartosc)
+  hash = ("0x" .. glowna[wartosc])
+  ladowanie(hash)
+  --print("poszło2")
+  Wait(200)
+  glowna = lista_kamizelka
+  wartosc = tonumber(_ubranie.kamizelka)
+  --print(wartosc)
+  hash = ("0x" .. glowna[wartosc])
+  ladowanie(hash)
+  --print("poszło3")
+  Wait(200)
+  glowna = lista_spodnie
+  wartosc = tonumber(_ubranie.spodnie)
+  --print(wartosc)
+  hash = ("0x" .. glowna[wartosc])
+  ladowanie(hash)
+  --print("poszło4")
+  Wait(200)
+  glowna = lista_maska
+  wartosc = tonumber(_ubranie.maska)
+  if wartosc > 1 then
+    --print(wartosc)
+    hash = ("0x" .. glowna[wartosc])
+    ladowanie(hash)
+    --print("poszło5")
+  end
+  Wait(200)
+  glowna = lista_buty
+  wartosc = tonumber(_ubranie.buty)
+  --print(wartosc)
+  hash = ("0x" .. glowna[wartosc])
+  ladowanie(hash)
+  --print("poszło6")
 else
 
 
 
-Citizen.InvokeNative(0xD710A5007C2AC539, PlayerPedId(), 0x662AC34, 0) -- Set target category, here the hash is for hats
-Citizen.InvokeNative(0xCC8CA3E88256E58F, PlayerPedId(), 0, 1, 1, 1, 0) -- Actually remove the component
+  Citizen.InvokeNative(0xD710A5007C2AC539, PlayerPedId(), 0x662AC34, 0) -- Set target category, here the hash is for hats
+  Citizen.InvokeNative(0xCC8CA3E88256E58F, PlayerPedId(), 0, 1, 1, 1, 0) -- Actually remove the component
 
 
-glowna = lista_kapelusze_f
-wartosc = tonumber(_ubranie.kapelusz)
-if wartosc > 1 then
---print(wartosc)
-hash = ("0x" .. glowna[wartosc])
-ladowanie(hash)
---print("poszło1")
+  glowna = lista_kapelusze_f
+  wartosc = tonumber(_ubranie.kapelusz)
+  if wartosc > 1 then
+    --print(wartosc)
+    hash = ("0x" .. glowna[wartosc])
+    ladowanie(hash)
+    --print("poszło1")
+  end
+  Wait(200)
+  glowna = lista_koszula_f
+  wartosc = tonumber(_ubranie.koszula)
+  --print(wartosc)
+  hash = ("0x" .. glowna[wartosc])
+  ladowanie(hash)
+  --print("poszło2")
+  Wait(200)
+  glowna = lista_kamizelka_f
+  wartosc = tonumber(_ubranie.kamizelka)
+  --print(wartosc)
+  hash = ("0x" .. glowna[wartosc])
+  ladowanie(hash)
+  --print("poszło3")
+  Wait(200)
+  glowna = lista_spodnie_f
+  wartosc = tonumber(_ubranie.spodnie)
+  if wartosc > 1 then
+    --print(wartosc)
+    hash = ("0x" .. glowna[wartosc])
+    ladowanie(hash)
+    --print("poszło4")
+  end
+  Wait(200)
+  glowna = lista_maska_f
+  wartosc = tonumber(_ubranie.maska)
+  if wartosc > 1 then
+    --print(wartosc)
+    hash = ("0x" .. glowna[wartosc])
+    ladowanie(hash)
+    --print("poszło5")
+  end
+  Wait(200)
+  glowna = lista_buty_f
+  wartosc = tonumber(_ubranie.buty)
+  --print(wartosc)
+  hash = ("0x" .. glowna[wartosc])
+  ladowanie(hash)
+  --print("poszło6")
+  Wait(200)
+  glowna = lista_spodnica
+  wartosc = tonumber(_ubranie.spodnica)
+  if wartosc > 1 then
+    --print(wartosc)
+    hash = ("0x" .. glowna[wartosc])
+    ladowanie(hash)
+    --print("poszło7")
+  end
 end
-Wait(200)
-glowna = lista_koszula_f
-wartosc = tonumber(_ubranie.koszula)
---print(wartosc)
-hash = ("0x" .. glowna[wartosc])
-ladowanie(hash)
---print("poszło2")
-Wait(200)
-glowna = lista_kamizelka_f
-wartosc = tonumber(_ubranie.kamizelka)
---print(wartosc)
-hash = ("0x" .. glowna[wartosc])
-ladowanie(hash)
---print("poszło3")
-Wait(200)
-glowna = lista_spodnie_f
-wartosc = tonumber(_ubranie.spodnie)
-if wartosc > 1 then
---print(wartosc)
-hash = ("0x" .. glowna[wartosc])
-ladowanie(hash)
---print("poszło4")
-end
-Wait(200)
-glowna = lista_maska_f
-wartosc = tonumber(_ubranie.maska)
-if wartosc > 1 then
---print(wartosc)
-hash = ("0x" .. glowna[wartosc])
-ladowanie(hash)
---print("poszło5")
-end
-Wait(200)
-glowna = lista_buty_f
-wartosc = tonumber(_ubranie.buty)
---print(wartosc)
-hash = ("0x" .. glowna[wartosc])
-ladowanie(hash)
---print("poszło6")
-Wait(200)
-glowna = lista_spodnica
-wartosc = tonumber(_ubranie.spodnica)
-if wartosc > 1 then
---print(wartosc)
-hash = ("0x" .. glowna[wartosc])
-ladowanie(hash)
---print("poszło7")
-	end
-	end
 end)
 
 
 function ladowanie(hash)
-Citizen.InvokeNative(0xD3A7B003ED343FD9 , PlayerPedId(),  tonumber(hash), true, true, true)
---print("poszło13")
---print(hash)
+  Citizen.InvokeNative(0xD3A7B003ED343FD9 , PlayerPedId(),  tonumber(hash), true, true, true)
+  --print("poszło13")
+  --print(hash)
 end
