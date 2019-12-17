@@ -1,4 +1,4 @@
-# redem_clothing
+# redem_clothing 0.2V PRE-ALPHA
 
 ## 1. Requirements
 
