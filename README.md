@@ -17,6 +17,7 @@ Add ```ensure redem_clothing``` in server.cfg
 
 ## 4. Credits
 [Ktos93](http://github.com/amakuu)
+
 [amakuu](http://github.com/amakuu) - Thanks for the redemrp_skin look
 
 Join discord to get support! - https://discord.gg/FKH4uwb
