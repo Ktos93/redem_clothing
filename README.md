@@ -15,6 +15,13 @@ First of all you need to insert the .sql file into your database.
 
 Add ```ensure redem_clothing``` in server.cfg
 
+## 3. Run
+You can use:
+
+/clothing -to open menu
+
+/loadcloath -to load clothes
+
 ## 4. Credits
 [Ktos93](http://github.com/amakuu)
 
