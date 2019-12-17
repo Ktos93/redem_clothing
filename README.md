@@ -15,6 +15,8 @@ First of all you need to insert the .sql file into your database.
 
 Add ```ensure redem_clothing``` in server.cfg
 
+Without redemrp_skin nothing show up
+
 ## 3. Run
 You can use:
 
