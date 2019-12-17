@@ -3,8 +3,11 @@
 ## 1. Requirements
 
 [redem](https://github.com/kanersps/redem)
+
 [redem-roleplay](https://github.com/RedEM-RP/redem_roleplay/)
+
 [redemrp_identity](https://github.com/RedEM-RP/redemrp_identity/)
+
 [redemrp_skin](https://github.com/RedEM-RP/redemrp_skin/)
 
 ## 2. Installation
