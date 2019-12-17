@@ -1,34 +1,19 @@
-# redemrp_skin
-Character Creation System for RedEM:RP framework
+# redem_clothing
 
 ## 1. Requirements
 
 [redem](https://github.com/kanersps/redem)
-
 [redem-roleplay](https://github.com/RedEM-RP/redem_roleplay/)
+[redemrp_identity](https://github.com/RedEM-RP/redemrp_identity/)
+[redemrp_skin](https://github.com/RedEM-RP/redemrp_skin/)
 
 ## 2. Installation
 First of all you need to insert the .sql file into your database.
 
-Put the redemrp_skin into [redemrp] folder in your resources.
-
-Add ```ensure redemrp_skin``` in server.cfg
-
-
-## 3. Bugs and Errors
-We are not providing the support for this resource for now,
-cause its unstable and pre-released.
-If you find any bug, please open the issue on Github(here).
+Add ```ensure redem_clothing``` in server.cfg
 
 ## 4. Credits
-[amakuu](http://github.com/amakuu)
+[Ktos93](http://github.com/amakuu)
+[amakuu](http://github.com/amakuu) - Thanks for the redemrp_skin look
 
-[imThaku](https://github.com/imThaku) - for sending me CSV files with all Character components
-
-
-## Disclaimer
-Please do not add the clothing features to this!
-
-Clothing system will be created separately.
-
-Join our discord to get support! - https://discord.gg/FKH4uwb
+Join discord to get support! - https://discord.gg/FKH4uwb
