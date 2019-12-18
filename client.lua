@@ -23,7 +23,7 @@ local lista_spodnica = { "27B2AA60","648E23FE","C26F349", "C27B462C","DD9FFFF3",
 
 local glowna = lista_kapelusze
 local sex_global = 1
-
+local cam = nil
 
 RegisterNetEvent('redem_clothing:sex')
 AddEventHandler('redem_clothing:sex', function(skin)
@@ -38,6 +38,8 @@ else
 end
 startUI(sex)
 SetNuiFocus(true, true)
+camera()
+
 Citizen.InvokeNative(0xD710A5007C2AC539, PlayerPedId(), 0x662AC34, 0) -- Set target category, here the hash is for hats
 Citizen.InvokeNative(0xCC8CA3E88256E58F, PlayerPedId(), 0, 1, 1, 1, 0) -- Actually remove the component
 end)
@@ -62,16 +64,21 @@ end
 
 RegisterCommand('clothing', function(source, args)
 TriggerServerEvent("redem_clothing:sex_test", function(cb)
+	end)
 end)
 
-end)
-RegisterCommand('clothing_close', function(source, args)
-hideUI()
-SetNuiFocus(false, false)
+
+
+RegisterNUICallback('heading', function(heading)
+local playerPed = PlayerPedId()
+local _heading = heading/1 -- yes :1 xD
+print(_heading)
+SetEntityHeading(playerPed, _heading)
 end)
 
 RegisterNUICallback('Save', function(data, cb)
 SetNuiFocus(false, false)
+distroy()
 local elementy = {
   ["kapelusz"] = data.kapelusz,
   ["koszula"] = data.koszula,
@@ -83,9 +90,10 @@ local elementy = {
 
 }
 --print("tak1")
-
+print(tonumber(elementy.kapelusz)) -- INCOMING
+local price = 10
 local json = json.encode(elementy)
-TriggerServerEvent("redem_clothing:Save", json, function(cb)
+TriggerServerEvent("redem_clothing:Save", json, price, function(cb)
      if cb then
          print("DONE")
      else
@@ -167,7 +175,16 @@ Citizen.InvokeNative(0xCC8CA3E88256E58F, PlayerPedId(), 0, 1, 1, 1, 0) -- Actual
 end)
 
 
-
+RegisterNetEvent('redem_clothing:load2')
+  AddEventHandler('redem_clothing:load2', function()
+   TriggerServerEvent("redem_clothing:loadClothes", function(cb)
+end)
+  end)
+RegisterNetEvent('redem_clothing:load_def')
+  AddEventHandler('redem_clothing:load_def', function()
+   TriggerServerEvent("redemrp_skin:loadSkin", function(cb)
+	 end)
+  end)
 
 RegisterCommand("loadcloath", function(source, args)
  TriggerServerEvent("redem_clothing:loadClothes", function(cb)
@@ -190,6 +207,18 @@ else
 end
     
 if sex == 1 then
+ Wait(200)
+  glowna = lista_maska
+  wartosc = tonumber(_ubranie.maska)
+  if wartosc > 1 then
+    --print(wartosc)
+    hash = ("0x" .. glowna[wartosc])
+    ladowanie(hash)
+    --print("poszło5")
+		else
+	Citizen.InvokeNative(0xD710A5007C2AC539, PlayerPedId(), 0x7505EF42, 0) -- Set target category, here the hash is for hats
+	Citizen.InvokeNative(0xCC8CA3E88256E58F, PlayerPedId(), 0, 1, 1, 1, 0) -- Actually remove the component
+  end
   glowna = lista_kapelusze
   wartosc = tonumber(_ubranie.kapelusz)
    if wartosc > 1 then
@@ -219,15 +248,7 @@ if sex == 1 then
   hash = ("0x" .. glowna[wartosc])
   ladowanie(hash)
   --print("poszło4")
-  Wait(200)
-  glowna = lista_maska
-  wartosc = tonumber(_ubranie.maska)
-  if wartosc > 1 then
-    --print(wartosc)
-    hash = ("0x" .. glowna[wartosc])
-    ladowanie(hash)
-    --print("poszło5")
-  end
+ 
   Wait(200)
   glowna = lista_buty
   wartosc = tonumber(_ubranie.buty)
@@ -242,7 +263,19 @@ else
   Citizen.InvokeNative(0xD710A5007C2AC539, PlayerPedId(), 0x662AC34, 0) -- Set target category, here the hash is for hats
   Citizen.InvokeNative(0xCC8CA3E88256E58F, PlayerPedId(), 0, 1, 1, 1, 0) -- Actually remove the component
 
-
+ Wait(200)
+  glowna = lista_maska_f
+  wartosc = tonumber(_ubranie.maska)
+  if wartosc > 1 then
+    --print(wartosc)
+    hash = ("0x" .. glowna[wartosc])
+    ladowanie(hash)
+    --print("poszło5")
+	else
+	Citizen.InvokeNative(0xD710A5007C2AC539, PlayerPedId(), 0x7505EF42, 0) -- Set target category, here the hash is for hats
+	Citizen.InvokeNative(0xCC8CA3E88256E58F, PlayerPedId(), 0, 1, 1, 1, 0) -- Actually remove the component
+  end
+  
   glowna = lista_kapelusze_f
   wartosc = tonumber(_ubranie.kapelusz)
   if wartosc > 1 then
@@ -274,15 +307,7 @@ else
     ladowanie(hash)
     --print("poszło4")
   end
-  Wait(200)
-  glowna = lista_maska_f
-  wartosc = tonumber(_ubranie.maska)
-  if wartosc > 1 then
-    --print(wartosc)
-    hash = ("0x" .. glowna[wartosc])
-    ladowanie(hash)
-    --print("poszło5")
-  end
+ 
   Wait(200)
   glowna = lista_buty_f
   wartosc = tonumber(_ubranie.buty)
@@ -301,10 +326,82 @@ else
   end
 end
 end)
-
-
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+RegisterNetEvent('redem_clothing:cancel')
+  AddEventHandler('redem_clothing:cancel', function()
+local timer = 200
+	while timer > 0 do
+		Citizen.Wait(0)
+		DrawTxt("NO MONEY", 0.50, 0.90, 0.6, 0.6, true, 161, 3, 0, 255, true, 10000)
+		timer = timer - 1
+	end
+end)
+ 
+ 
 function ladowanie(hash)
   Citizen.InvokeNative(0xD3A7B003ED343FD9 , PlayerPedId(),  tonumber(hash), true, true, true)
   --print("poszło13")
   --print(hash)
+end
+
+
+ function DrawTxt(str, x, y, w, h, enableShadow, col1, col2, col3, a, centre)
+ local str = CreateVarString(10, "LITERAL_STRING", str, Citizen.ResultAsLong())
+	SetTextScale(w, h)
+	SetTextColor(math.floor(col1), math.floor(col2), math.floor(col3), math.floor(a))
+	SetTextCentre(centre)
+    if enableShadow then SetTextDropshadow(1, 0, 0, 0, 255) end
+	Citizen.InvokeNative(0xADA9255D, 10);
+	DisplayText(str, x, y)
+end
+
+function distroy()
+	SetCamActive(cam, false)
+	RenderScriptCams(false, true, 500, true, true)
+	cam = nil
+end
+
+function camera()
+local playerPed = PlayerPedId()
+local coords    = GetEntityCoords(playerPed)
+local heading = 90.0
+local zoomOffset = 3.0
+local camOffset = -0.06
+local angle = heading * math.pi / 180.0
+			local theta = {
+				x = math.cos(angle),
+				y = math.sin(angle)
+			}
+			print(theta.x)
+		local pos = {
+				x = coords.x + (zoomOffset * theta.x),
+				y = coords.y + (zoomOffset * theta.y)
+			}
+		print(pos.x)
+			local angleToLook = heading - 140.0
+			if angleToLook > 360 then
+				angleToLook = angleToLook - 360
+			elseif angleToLook < 0 then
+				angleToLook = angleToLook + 360
+			end
+		print(angleToLook)
+			angleToLook = angleToLook * math.pi / 180.0
+			local thetaToLook = {
+				x = math.cos(angleToLook),
+				y = math.sin(angleToLook)
+			}
+		print(thetaToLook.x)
+			local posToLook = {
+				x = coords.x + (zoomOffset * thetaToLook.x),
+				y = coords.y + (zoomOffset * thetaToLook.y)
+			}
+		print(posToLook.x)
+
+	SetEntityHeading(playerPed, 15.00)
+    cam = CreateCamWithParams("DEFAULT_SCRIPTED_CAMERA", pos.x, pos.y, coords.z + camOffset, 300.00,0.00,0.00, 40.00, false, 0)
+    PointCamAtCoord(cam, posToLook.x, posToLook.y, coords.z + camOffset)
+    SetCamActive(cam, true)
+    RenderScriptCams(true, false, 1, true, true)
+    DisplayHud(false)
+    DisplayRadar(false)
 end
