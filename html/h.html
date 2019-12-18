@@ -23,6 +23,7 @@
 <body>
 
 	<script>
+	
 		var component = "kapelusz";
 		var sex = 1;
 		$(function(){
@@ -32,6 +33,7 @@
 					if (item !== undefined && item.type === "ui") {		                
 						if (item.display === true) {
 		                  		    $("#mina").show();
+									document.getElementById("test9").value = 15;
 							if (item.sex3 === 2) {
 								var x = document.getElementById("skirt");
 								x.style.display = "block";
@@ -44,7 +46,8 @@
 							var suwak4 = document.getElementById("test5");	
 							var suwak5 = document.getElementById("test6");
 							var suwak6 = document.getElementById("test7");		
-							var suwak7 = document.getElementById("test8");									
+							var suwak7 = document.getElementById("test8");	
+							var suwak8 = document.getElementById("test9");								
 							var wartosc = 1;	
 	
 						suwak.oninput = function() 
@@ -112,6 +115,13 @@
 								$.post('http:/redem_clothing/komponent', JSON.stringify(component));
 								$.post('http:/redem_clothing/zmiana', JSON.stringify(wartosc));
 								}
+						suwak8.oninput = function() 
+								
+							{
+		
+								heading = this.value;
+								$.post('http:/redem_clothing/heading', JSON.stringify(heading));
+								}
 			
 						} else {
 		                    $("#mina").hide();
@@ -177,6 +187,8 @@ BOOTS:<label id="boots">1</label><br>
 SKIRT:<label id="skirt">1</label><br>
 <input type="range" name="points" min="1" max="10" value="1"class="slider" id="test8" oninput="document.getElementById('skirt').innerHTML = this.value"><br>
 </div>
+HEADING:<br>
+<input type="range" name="points" min="1" max="360" value="1" class="slider" id="test9"><br>
 </div>
 <div class="done">
 		<input type="button" class="submit" value="SAVE" onclick="Save()"><br>
