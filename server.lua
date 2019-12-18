@@ -43,17 +43,18 @@ end
 
 
 MySQL.Async.fetchAll('SELECT * FROM clothes WHERE `identifier`=@identifier AND `charid`=@charid;', {identifier = identifier, charid = charid}, function(ubrania)
-if ubrania[1] then
-  ubrania = ubrania[1].clothes
-end
-if ubrania and skin ~= nil then
-  --print(ubrania)
-  TriggerClientEvent("redem_clothing:load", _source, skin, ubrania)
-end
+     if ubrania[1] then
+       ubrania = ubrania[1].clothes
+     end
+                                        
+     if ubrania and skin ~= nil then
+      --print(ubrania)
+      TriggerClientEvent("redem_clothing:load", _source, skin, ubrania)
+     end
 
-end)
-end)
-end)
+            end)
+        end)
+    end)
 end)
 
 
@@ -66,23 +67,23 @@ TriggerEvent('redemrp:getPlayerFromId', source, function(user)
      local charid = user.getSessionVar("charid")
 
 MySQL.Async.fetchAll('SELECT * FROM skins WHERE `identifier`=@identifier AND `charid`=@charid;', {identifier = identifier, charid = charid}, function(skins)
-if skins[1]then
-  skin = skins[1].skin
-  if skin ~= nil then
-    TriggerClientEvent("redem_clothing:sex", _source, skin)
-  end
-end
-end)
-end)
+     if skins[1]then
+        skin = skins[1].skin
+              if skin ~= nil then
+                    TriggerClientEvent("redem_clothing:sex", _source, skin)
+               end
+          end
+      end)
+   end)
 end)
 
 AddEventHandler('redem_clothing:retrieveClothes', function(identifier, charid, callback)
 local Callback = callback
-MySQL.Async.fetchAll('SELECT * FROM clothes WHERE `identifier`=@identifier AND `charid`=@charid;', {identifier = identifier, charid = charid}, function(ubrania)
-if ubrania[1] then
-  Callback(ubrania[1])
-else
-  Callback(false)
-end
-end)
+     MySQL.Async.fetchAll('SELECT * FROM clothes WHERE `identifier`=@identifier AND `charid`=@charid;', {identifier = identifier, charid = charid}, function(ubrania)
+          if ubrania[1] then
+                Callback(ubrania[1])
+          else
+                Callback(false)
+          end
+     end)
 end)
