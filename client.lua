@@ -1,4 +1,4 @@
---[[To add clothes, copy the hash, paste it at the end of the list (_f means women Only MP components work)--]]
+--[[To add clothes, copy the hash, paste it at the end of the list and add range in slider(_f means women Only MP components work)--]]
 
 local lista_kapelusze = { "9925C067","17C59C8F","23582134", "208B8617","23582134","9E59C41","AE05E47F","503FA8F0","5E0FFB00","728EA40D"} --hat
 local lista_kapelusze_f = { "9925C067","15AE34D2","19E100C6", "1FA04DDE","26AE2699","2722B913","2BBAA479","2DD1EA41","295788CF","3940E002"}
