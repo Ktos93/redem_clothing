@@ -1,10 +1,15 @@
 RegisterServerEvent('redem_clothing:Save')
-AddEventHandler('redem_clothing:Save', function(ubrania, cb)
+AddEventHandler('redem_clothing:Save', function(ubrania, price, cb)
 local _ubrania = ubrania
+local _price = price
 local decode = json.decode(ubrania)
+print (_price)
 TriggerEvent('redemrp:getPlayerFromId', source, function(user)
      local identifier = user.getIdentifier()
      local charid = user.getSessionVar("charid")
+	 local currentMoney = user.getMoney()
+	 print (currentMoney)
+	 if currentMoney >= _price then
         TriggerEvent("redem_clothing:retrieveClothes", identifier, charid, function(call)
 
 if call then
@@ -22,6 +27,12 @@ else
   end)
 end
 end)
+else 
+print("ZA MALO PIENIEDZY")
+TriggerClientEvent("redem_clothing:load2" , source)
+TriggerClientEvent('redem_clothing:cancel', source)
+end
+
 
 end)
 end)
@@ -31,6 +42,7 @@ AddEventHandler('redem_clothing:loadClothes', function()
 local _source = source
 local skin = nil
 local ubrania = nil
+local ubranie2 = 0
 TriggerEvent('redemrp:getPlayerFromId', source, function(user)
      local identifier = user.getIdentifier()
      local charid = user.getSessionVar("charid")
@@ -38,6 +50,8 @@ TriggerEvent('redemrp:getPlayerFromId', source, function(user)
 MySQL.Async.fetchAll('SELECT * FROM skins WHERE `identifier`=@identifier AND `charid`=@charid;', {identifier = identifier, charid = charid}, function(skins)
 if skins[1]then
   skin = skins[1].skin
+  else
+	   skin = nil
 end
 
 
@@ -45,11 +59,14 @@ end
 MySQL.Async.fetchAll('SELECT * FROM clothes WHERE `identifier`=@identifier AND `charid`=@charid;', {identifier = identifier, charid = charid}, function(ubrania)
      if ubrania[1] then
        ubrania = ubrania[1].clothes
+	   else
+	   ubrania = nil
      end
-                                        
-     if ubrania and skin ~= nil then
-      --print(ubrania)
+	 
+     if ubrania ~= nil and skin ~= nil then
       TriggerClientEvent("redem_clothing:load", _source, skin, ubrania)
+	  else
+	 TriggerClientEvent("redem_clothing:load_def" , _source)
      end
 
             end)
