@@ -12,7 +12,7 @@
 	<style type="text/css">
 		#mina {
 			display: none;
-			overflow: hidden;
+			overflow: hidden;	
 		}
 		#skirt {
 		display:none;	
@@ -156,26 +156,26 @@
 <div class="title">CLOTHES</div>
 
 <div class="grubosc selector">
-HAT:<br>
-<input type="range" name="points" min="1" max="10" value="1"class="slider" id="test2"><br>
+HAT:<label id="hat">1</label><br>
+<input type="range" name="points" min="1" max="10" value="1"class="slider" id="test2" oninput="document.getElementById('hat').innerHTML = this.value"><br>
 
-SHIRT:<br>
-<input type="range" name="points" min="1" max="10" value="1"class="slider" id="test3"><br>
+SHIRT:<label id="shirt">1</label><br>
+<input type="range" name="points" min="1" max="10" value="1"class="slider" id="test3" oninput="document.getElementById('shirt').innerHTML = this.value"><br>
 
-VEST:<br>
-<input type="range" name="points" min="1" max="10" value="1"class="slider" id="test4"><br>
+VEST:<label id="vest">1</label><br>
+<input type="range" name="points" min="1" max="10" value="1"class="slider" id="test4" oninput="document.getElementById('vest').innerHTML = this.value"><br>
 
-PANTS:<br>
-<input type="range" name="points" min="1" max="10" value="1"class="slider" id="test5"><br>
+PANTS:<label id="pants">1</label><br>
+<input type="range" name="points" min="1" max="10" value="1"class="slider" id="test5" oninput="document.getElementById('pants').innerHTML = this.value"><br>
 
-MASK:<br>
-<input type="range" name="points" min="1" max="10" value="1"class="slider" id="test6"><br>
+MASK:<label id="mask">1</label><br>
+<input type="range" name="points" min="1" max="10" value="1"class="slider" id="test6" oninput="document.getElementById('mask').innerHTML = this.value"><br>
 
-BOOTS:<br>
-<input type="range" name="points" min="1" max="10" value="1"class="slider" id="test7"><br>
+BOOTS:<label id="boots">1</label><br>
+<input type="range" name="points" min="1" max="10" value="1"class="slider" id="test7" oninput="document.getElementById('boots').innerHTML = this.value"><br>
 <div id="skirt">
-SKIRT:<br>
-<input type="range" name="points" min="1" max="10" value="1"class="slider" id="test8"><br>
+SKIRT:<label id="skirt">1</label><br>
+<input type="range" name="points" min="1" max="10" value="1"class="slider" id="test8" oninput="document.getElementById('skirt').innerHTML = this.value"><br>
 </div>
 </div>
 <div class="done">
