@@ -86,14 +86,13 @@ local elementy = {
 
 local json = json.encode(elementy)
 TriggerServerEvent("redem_clothing:Save", json, function(cb)
-if cb then
-  --	print("DONE")
-else
-  --	print("ERROR")
-end
-end)
+     if cb then
+         print("DONE")
+     else
+         print("ERROR")
+      end
+  end)
 --	print("tak2")
-
 end)
 
 
@@ -133,8 +132,6 @@ elseif sex_global == 2 then
 
   end
 end
-
-
 --print(component)
 end)
 
@@ -173,7 +170,7 @@ end)
 
 
 RegisterCommand("loadcloath", function(source, args)
-TriggerServerEvent("redem_clothing:loadClothes", function(cb)
+ TriggerServerEvent("redem_clothing:loadClothes", function(cb)
 end)
 end)
 
@@ -191,10 +188,11 @@ if _skin.sex == "male" then
 else
   sex = 2
 end
+    
 if sex == 1 then
   glowna = lista_kapelusze
   wartosc = tonumber(_ubranie.kapelusz)
-  if wartosc > 1 then
+   if wartosc > 1 then
     --print(wartosc)
     hash = ("0x" .. glowna[wartosc])
     ladowanie(hash)
