@@ -17,7 +17,7 @@ Add ```ensure redem_clothing``` in server.cfg
 
 Without redemrp_skin nothing show up
 
-## 3.HOW TO START
+## 3. How to start
 You can use:
 
 /clothing -to open menu
