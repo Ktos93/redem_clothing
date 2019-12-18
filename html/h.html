@@ -31,11 +31,11 @@
 					var item = event.data;
 					if (item !== undefined && item.type === "ui") {		                
 						if (item.display === true) {
-		                    $("#mina").show();
+		                  		    $("#mina").show();
 							if (item.sex3 === 2) {
-							var x = document.getElementById("skirt");
-							x.style.display = "block";
-							sex = 2 ;
+								var x = document.getElementById("skirt");
+								x.style.display = "block";
+								sex = 2 ;
 							}
 						
 							var suwak = document.getElementById("test2");	
@@ -47,7 +47,7 @@
 							var suwak7 = document.getElementById("test8");									
 							var wartosc = 1;	
 	
-							suwak.oninput = function() 
+						suwak.oninput = function() 
 							{
 		
 								wartosc = this.value;
@@ -56,7 +56,7 @@
 								$.post('http:/redem_clothing/zmiana', JSON.stringify(wartosc));
 								}
 								
-								suwak2.oninput = function() 
+						suwak2.oninput = function() 
 							{
 		
 								wartosc = this.value;
@@ -64,7 +64,7 @@
 								$.post('http:/redem_clothing/komponent', JSON.stringify(component));
 								$.post('http:/redem_clothing/zmiana', JSON.stringify(wartosc));
 								}
-								suwak3.oninput = function() 
+						suwak3.oninput = function() 
 								
 							{
 		
@@ -73,7 +73,7 @@
 								$.post('http:/redem_clothing/komponent', JSON.stringify(component));
 								$.post('http:/redem_clothing/zmiana', JSON.stringify(wartosc));
 								}
-										suwak4.oninput = function() 
+						suwak4.oninput = function() 
 								
 							{
 		
@@ -83,7 +83,7 @@
 								$.post('http:/redem_clothing/zmiana', JSON.stringify(wartosc));
 								}
 								
-								suwak5.oninput = function() 
+						suwak5.oninput = function() 
 								
 							{
 		
@@ -94,7 +94,7 @@
 								}
 								
 								
-								suwak6.oninput = function() 
+						suwak6.oninput = function() 
 								
 							{
 		
@@ -103,7 +103,7 @@
 								$.post('http:/redem_clothing/komponent', JSON.stringify(component));
 								$.post('http:/redem_clothing/zmiana', JSON.stringify(wartosc));
 								}
-									suwak7.oninput = function() 
+						suwak7.oninput = function() 
 								
 							{
 		
@@ -131,13 +131,13 @@
 			var maska1 = document.getElementById('test6').value;
 			var buty1 = document.getElementById('test7').value;
 			if (sex === 2){
-			var spodnica1 = document.getElementById('test8').value;
-			$.post('http:/redem_clothing/Save', JSON.stringify({kapelusz: kapelusz1, koszula: koszula1, kamizelka: kamizelka1, spodnie: spodnie1, maska: maska1, buty: buty1, spodnica: spodnica1}));
-			$("#mina").hide();
-			}
+				var spodnica1 = document.getElementById('test8').value;
+				$.post('http:/redem_clothing/Save', JSON.stringify({kapelusz: kapelusz1, koszula: koszula1, kamizelka: kamizelka1, spodnie: spodnie1, maska: maska1, buty: buty1, spodnica: spodnica1}));
+				$("#mina").hide();
+				}
 			else{
-			$.post('http:/redem_clothing/Save', JSON.stringify({kapelusz: kapelusz1, koszula: koszula1, kamizelka: kamizelka1, spodnie: spodnie1, maska: maska1, buty: buty1}));
-			$("#mina").hide();
+				$.post('http:/redem_clothing/Save', JSON.stringify({kapelusz: kapelusz1, koszula: koszula1, kamizelka: kamizelka1, spodnie: spodnie1, maska: maska1, buty: buty1}));
+				$("#mina").hide();
 				}
 
 		}
