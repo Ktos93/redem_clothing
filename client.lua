@@ -78,7 +78,7 @@ end)
 
 RegisterNUICallback('Save', function(data, cb)
 SetNuiFocus(false, false)
-distroy()
+destroy()
 local elementy = {
   ["kapelusz"] = data.kapelusz,
   ["koszula"] = data.koszula,
@@ -355,7 +355,7 @@ end
 	DisplayText(str, x, y)
 end
 
-function distroy()
+function destroy()
 	SetCamActive(cam, false)
 	RenderScriptCams(false, true, 500, true, true)
 	cam = nil
