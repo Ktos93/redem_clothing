@@ -18,6 +18,9 @@ local lista_maska_f = { "7505EF42","102A2B4A","2DCAF428", "29E9DEC9","46A49515",
 local lista_buty = { "16F1960A","189227AA","1CCEE58D", "1EF2B6A3","25C9CD3B","3420118","3B194911","40568254","432FFAD1","4818E747"} --boots
 local lista_buty_f = { "106A2126","118E7E7C","134D7E03", "14683CDF","1696E043","19ADA9E","1AFAC5E","1B844230","1BCE1200","1CCD18F6"}
 ----------------------------------------------------------------------------------------------------------------------------------
+local lista_plaszcz = { "105F0147","12E51663","1377C4A2", "178CBCFD","1F79CDC8","22A8A5DA","32C84619","3B54B33C","40E1109A","41D9A165"} --coats
+local lista_plaszcz_f = { "103945D2","12F06E5","14511493", "454CD05","16F991F3","1B67B645","2099FE43","21FBEC56","24876E6E","285EF3C5"}
+----------------------------------------------------------------------------------------------------------------------------------
 local lista_spodnica = { "27B2AA60","648E23FE","C26F349", "C27B462C","DD9FFFF3","A6E19277","EFCD244D","117BBF76","51E0A707","CE40F574"} --skirt
 
 
@@ -78,7 +81,7 @@ end)
 
 RegisterNUICallback('Save', function(data, cb)
 SetNuiFocus(false, false)
-destroy()
+destory()
 local elementy = {
   ["kapelusz"] = data.kapelusz,
   ["koszula"] = data.koszula,
@@ -86,7 +89,8 @@ local elementy = {
   ["spodnie"] = data.spodnie,
   ["maska"] = data.maska,
   ["buty"] = data.buty,
-  ["spodnica"] = data.spodnica
+  ["spodnica"] = data.spodnica,
+  ["plaszcz"] = data.plaszcz
 
 }
 --print("tak1")
@@ -108,7 +112,6 @@ RegisterNUICallback('komponent', function(component)
 if sex_global == 1 then
   if component == "kapelusz" then
     glowna = lista_kapelusze
-    kapelusz_del = 2
   elseif component == "koszula" then
     glowna = lista_koszula
   elseif component == "kamizelka" then
@@ -120,6 +123,8 @@ if sex_global == 1 then
     maska_del = 2
   elseif component == "buty" then
     glowna = lista_buty
+  elseif component == "plaszcz" then
+    glowna = lista_plaszcz
   end
 
 elseif sex_global == 2 then
@@ -137,6 +142,8 @@ elseif sex_global == 2 then
     glowna = lista_buty_f
   elseif component == "spodnica" then
     glowna = lista_spodnica
+  elseif component == "plaszcz" then
+    glowna = lista_plaszcz_f
 
   end
 end
@@ -163,6 +170,14 @@ elseif glowna == lista_spodnie_f and wartosc2 == 1 then
 
 elseif glowna == lista_spodnica and wartosc2 == 1 then
   Citizen.InvokeNative(0xD710A5007C2AC539, PlayerPedId(), 0xA0E3AB7F, 0) -- Set target category, here the hash is for hats
+  -- Citizen.InvokeNative(0xCC8CA3E88256E58F, PlayerPedId(), 0, 1, 1, 1, 0) -- Actually remove the component
+  
+ elseif (glowna == lista_maska_f or glowna == lista_plaszcz) and wartosc2 == 1 then
+  Citizen.InvokeNative(0xD710A5007C2AC539, PlayerPedId(), 0xA0E3AB7F, 0) -- Set target category, here the hash is for hats
+  -- Citizen.InvokeNative(0xCC8CA3E88256E58F, PlayerPedId(), 0, 1, 1, 1, 0) -- Actually remove the component
+  
+  elseif (glowna == lista_kamizelka_f or glowna == lista_kamizelka) and wartosc2 == 1 then
+  Citizen.InvokeNative(0xD710A5007C2AC539, PlayerPedId(), 0x485EE834, 0) -- Set target category, here the hash is for hats
   -- Citizen.InvokeNative(0xCC8CA3E88256E58F, PlayerPedId(), 0, 1, 1, 1, 0) -- Actually remove the component
 
 else
@@ -235,12 +250,14 @@ if sex == 1 then
   ladowanie(hash)
   --print("poszło2")
   Wait(200)
+  if wartosc > 1 then
   glowna = lista_kamizelka
   wartosc = tonumber(_ubranie.kamizelka)
   --print(wartosc)
   hash = ("0x" .. glowna[wartosc])
   ladowanie(hash)
   --print("poszło3")
+  end
   Wait(200)
   glowna = lista_spodnie
   wartosc = tonumber(_ubranie.spodnie)
@@ -256,12 +273,18 @@ if sex == 1 then
   hash = ("0x" .. glowna[wartosc])
   ladowanie(hash)
   --print("poszło6")
+  Wait(200)
+   glowna = lista_plaszcz
+  wartosc = tonumber(_ubranie.plaszcz)
+   if wartosc > 1 then
+    --print(wartosc)
+    hash = ("0x" .. glowna[wartosc])
+    ladowanie(hash)
+    --print("poszło1")
+  end
 else
 
 
-
-  Citizen.InvokeNative(0xD710A5007C2AC539, PlayerPedId(), 0x662AC34, 0) -- Set target category, here the hash is for hats
-  Citizen.InvokeNative(0xCC8CA3E88256E58F, PlayerPedId(), 0, 1, 1, 1, 0) -- Actually remove the component
 
  Wait(200)
   glowna = lista_maska_f
@@ -271,7 +294,7 @@ else
     hash = ("0x" .. glowna[wartosc])
     ladowanie(hash)
     --print("poszło5")
-	else
+ else
 	Citizen.InvokeNative(0xD710A5007C2AC539, PlayerPedId(), 0x7505EF42, 0) -- Set target category, here the hash is for hats
 	Citizen.InvokeNative(0xCC8CA3E88256E58F, PlayerPedId(), 0, 1, 1, 1, 0) -- Actually remove the component
   end
@@ -292,12 +315,23 @@ else
   ladowanie(hash)
   --print("poszło2")
   Wait(200)
+  if wartosc > 1 then
   glowna = lista_kamizelka_f
   wartosc = tonumber(_ubranie.kamizelka)
   --print(wartosc)
   hash = ("0x" .. glowna[wartosc])
   ladowanie(hash)
   --print("poszło3")
+  end
+   Wait(200)
+  glowna = lista_plaszcz_f
+  wartosc = tonumber(_ubranie.plaszcz)
+  if wartosc > 1 then
+    --print(wartosc)
+    hash = ("0x" .. glowna[wartosc])
+    ladowanie(hash)
+    --print("poszło5")
+  end
   Wait(200)
   glowna = lista_spodnie_f
   wartosc = tonumber(_ubranie.spodnie)
@@ -355,7 +389,7 @@ end
 	DisplayText(str, x, y)
 end
 
-function destroy()
+function destory()
 	SetCamActive(cam, false)
 	RenderScriptCams(false, true, 500, true, true)
 	cam = nil
