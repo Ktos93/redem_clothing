@@ -394,6 +394,8 @@ function destory()
 	SetCamActive(cam, false)
 	RenderScriptCams(false, true, 500, true, true)
 	cam = nil
+	 DisplayHud(true)
+    DisplayRadar(true)
 end
 
 function camera()
