@@ -47,7 +47,8 @@
 							var suwak5 = document.getElementById("test6");
 							var suwak6 = document.getElementById("test7");		
 							var suwak7 = document.getElementById("test8");	
-							var suwak8 = document.getElementById("test9");								
+							var suwak8 = document.getElementById("test9");			
+							var suwak9 = document.getElementById("test10");									
 							var wartosc = 1;	
 	
 						suwak.oninput = function() 
@@ -55,6 +56,7 @@
 		
 								wartosc = this.value;
 								component = "kapelusz";
+								document.getElementById('hat').innerHTML = this.value+"/10";
 								$.post('http:/redem_clothing/komponent', JSON.stringify(component));
 								$.post('http:/redem_clothing/zmiana', JSON.stringify(wartosc));
 								}
@@ -64,6 +66,7 @@
 		
 								wartosc = this.value;
 								component = "koszula";
+								document.getElementById('shirt').innerHTML = this.value+"/10";
 								$.post('http:/redem_clothing/komponent', JSON.stringify(component));
 								$.post('http:/redem_clothing/zmiana', JSON.stringify(wartosc));
 								}
@@ -73,6 +76,7 @@
 		
 								wartosc = this.value;
 								component = "kamizelka";
+								document.getElementById('vest').innerHTML = this.value+"/10";
 								$.post('http:/redem_clothing/komponent', JSON.stringify(component));
 								$.post('http:/redem_clothing/zmiana', JSON.stringify(wartosc));
 								}
@@ -82,6 +86,7 @@
 		
 								wartosc = this.value;
 								component = "spodnie";
+								document.getElementById('pants').innerHTML = this.value+"/10";
 								$.post('http:/redem_clothing/komponent', JSON.stringify(component));
 								$.post('http:/redem_clothing/zmiana', JSON.stringify(wartosc));
 								}
@@ -92,6 +97,7 @@
 		
 								wartosc = this.value;
 								component = "maska";
+								document.getElementById('mask').innerHTML = this.value+"/10";
 								$.post('http:/redem_clothing/komponent', JSON.stringify(component));
 								$.post('http:/redem_clothing/zmiana', JSON.stringify(wartosc));
 								}
@@ -103,6 +109,7 @@
 		
 								wartosc = this.value;
 								component = "buty";
+								document.getElementById('boots').innerHTML = this.value+"/10";
 								$.post('http:/redem_clothing/komponent', JSON.stringify(component));
 								$.post('http:/redem_clothing/zmiana', JSON.stringify(wartosc));
 								}
@@ -112,6 +119,17 @@
 		
 								wartosc = this.value;
 								component = "spodnica";
+								document.getElementById('skirt').innerHTML = this.value+"/10";
+								$.post('http:/redem_clothing/komponent', JSON.stringify(component));
+								$.post('http:/redem_clothing/zmiana', JSON.stringify(wartosc));
+								}
+						suwak9.oninput = function() 
+								
+							{
+		
+								wartosc = this.value;
+								component = "plaszcz";
+								document.getElementById('coat').innerHTML = this.value+"/10";
 								$.post('http:/redem_clothing/komponent', JSON.stringify(component));
 								$.post('http:/redem_clothing/zmiana', JSON.stringify(wartosc));
 								}
@@ -140,22 +158,20 @@
 			var spodnie1 = document.getElementById('test5').value;
 			var maska1 = document.getElementById('test6').value;
 			var buty1 = document.getElementById('test7').value;
+			var plaszcz1 = document.getElementById('test10').value;
 			if (sex === 2){
 				var spodnica1 = document.getElementById('test8').value;
-				$.post('http:/redem_clothing/Save', JSON.stringify({kapelusz: kapelusz1, koszula: koszula1, kamizelka: kamizelka1, spodnie: spodnie1, maska: maska1, buty: buty1, spodnica: spodnica1}));
+				$.post('http:/redem_clothing/Save', JSON.stringify({kapelusz: kapelusz1, koszula: koszula1, kamizelka: kamizelka1, spodnie: spodnie1, maska: maska1, buty: buty1, plaszcz: plaszcz1, spodnica: spodnica1}));
 				$("#mina").hide();
 				}
 			else{
-				$.post('http:/redem_clothing/Save', JSON.stringify({kapelusz: kapelusz1, koszula: koszula1, kamizelka: kamizelka1, spodnie: spodnie1, maska: maska1, buty: buty1}));
+				$.post('http:/redem_clothing/Save', JSON.stringify({kapelusz: kapelusz1, koszula: koszula1, kamizelka: kamizelka1, spodnie: spodnie1, maska: maska1, buty: buty1, plaszcz: plaszcz1}));
 				$("#mina").hide();
 				}
-
 		}
 		
-
 	
 		
-
 	                
 		
 	</script>
@@ -166,28 +182,31 @@
 <div class="title">CLOTHES</div>
 
 <div class="grubosc selector">
-HAT:<label id="hat">1</label><br>
-<input type="range" name="points" min="1" max="10" value="1"class="slider" id="test2" oninput="document.getElementById('hat').innerHTML = this.value"><br>
+HAT<label id="hat">1/10</label><br>
+<input type="range" name="points" min="1" max="10" value="1"class="slider" id="test2"><br>
 
-SHIRT:<label id="shirt">1</label><br>
-<input type="range" name="points" min="1" max="10" value="1"class="slider" id="test3" oninput="document.getElementById('shirt').innerHTML = this.value"><br>
+SHIRT<label id="shirt">1/10</label><br>
+<input type="range" name="points" min="1" max="10" value="1"class="slider" id="test3"><br>
 
-VEST:<label id="vest">1</label><br>
-<input type="range" name="points" min="1" max="10" value="1"class="slider" id="test4" oninput="document.getElementById('vest').innerHTML = this.value"><br>
+VEST<label id="vest">1/10</label><br>
+<input type="range" name="points" min="1" max="10" value="1"class="slider" id="test4"><br>
 
-PANTS:<label id="pants">1</label><br>
-<input type="range" name="points" min="1" max="10" value="1"class="slider" id="test5" oninput="document.getElementById('pants').innerHTML = this.value"><br>
+COAT<label id="coat">1/10</label><br>
+<input type="range" name="points" min="1" max="10" value="1"class="slider" id="test10"><br>
 
-MASK:<label id="mask">1</label><br>
-<input type="range" name="points" min="1" max="10" value="1"class="slider" id="test6" oninput="document.getElementById('mask').innerHTML = this.value"><br>
+PANTS<label id="pants">1/10</label><br>
+<input type="range" name="points" min="1" max="10" value="1"class="slider" id="test5"><br>
 
-BOOTS:<label id="boots">1</label><br>
-<input type="range" name="points" min="1" max="10" value="1"class="slider" id="test7" oninput="document.getElementById('boots').innerHTML = this.value"><br>
+MASK<label id="mask">1/10</label><br>
+<input type="range" name="points" min="1" max="10" value="1"class="slider" id="test6"><br>
+
+BOOTS<label id="boots">1/10</label><br>
+<input type="range" name="points" min="1" max="10" value="1"class="slider" id="test7"><br>
 <div id="skirt">
-SKIRT:<label id="skirt">1</label><br>
-<input type="range" name="points" min="1" max="10" value="1"class="slider" id="test8" oninput="document.getElementById('skirt').innerHTML = this.value"><br>
+SKIRT<label id="skirt">1/10</label><br>
+<input type="range" name="points" min="1" max="10" value="1"class="slider" id="test8"><br>
 </div>
-HEADING:<br>
+HEADING<br>
 <input type="range" name="points" min="1" max="360" value="1" class="slider" id="test9"><br>
 </div>
 <div class="done">
