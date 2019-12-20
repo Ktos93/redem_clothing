@@ -42,9 +42,6 @@ end
 startUI(sex)
 SetNuiFocus(true, true)
 camera()
-
-Citizen.InvokeNative(0xD710A5007C2AC539, PlayerPedId(), 0x662AC34, 0) -- Set target category, here the hash is for hats
-Citizen.InvokeNative(0xCC8CA3E88256E58F, PlayerPedId(), 0, 1, 1, 1, 0) -- Actually remove the component
 end)
 
 function startUI(sex)
