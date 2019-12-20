@@ -42,6 +42,8 @@ end
 startUI(sex)
 SetNuiFocus(true, true)
 camera()
+
+
 end)
 
 function startUI(sex)
@@ -169,8 +171,8 @@ elseif glowna == lista_spodnica and wartosc2 == 1 then
   Citizen.InvokeNative(0xD710A5007C2AC539, PlayerPedId(), 0xA0E3AB7F, 0) -- Set target category, here the hash is for hats
   -- Citizen.InvokeNative(0xCC8CA3E88256E58F, PlayerPedId(), 0, 1, 1, 1, 0) -- Actually remove the component
   
- elseif (glowna == lista_maska_f or glowna == lista_plaszcz) and wartosc2 == 1 then
-  Citizen.InvokeNative(0xD710A5007C2AC539, PlayerPedId(), 0xA0E3AB7F, 0) -- Set target category, here the hash is for hats
+ elseif (glowna == lista_plaszcz_f or glowna == lista_plaszcz) and wartosc2 == 1 then
+  Citizen.InvokeNative(0xD710A5007C2AC539, PlayerPedId(), 0x662AC34, 0) -- Set target category, here the hash is for hats
   -- Citizen.InvokeNative(0xCC8CA3E88256E58F, PlayerPedId(), 0, 1, 1, 1, 0) -- Actually remove the component
   
   elseif (glowna == lista_kamizelka_f or glowna == lista_kamizelka) and wartosc2 == 1 then
@@ -227,9 +229,6 @@ if sex == 1 then
     hash = ("0x" .. glowna[wartosc])
     ladowanie(hash)
     --print("poszło5")
-		else
-	Citizen.InvokeNative(0xD710A5007C2AC539, PlayerPedId(), 0x7505EF42, 0) -- Set target category, here the hash is for hats
-	Citizen.InvokeNative(0xCC8CA3E88256E58F, PlayerPedId(), 0, 1, 1, 1, 0) -- Actually remove the component
   end
   glowna = lista_kapelusze
   wartosc = tonumber(_ubranie.kapelusz)
@@ -242,14 +241,16 @@ if sex == 1 then
   Wait(200)
   glowna = lista_koszula
   wartosc = tonumber(_ubranie.koszula)
+  if wartosc > 1 then
   --print(wartosc)
   hash = ("0x" .. glowna[wartosc])
   ladowanie(hash)
   --print("poszło2")
+  end
   Wait(200)
-  if wartosc > 1 then
   glowna = lista_kamizelka
   wartosc = tonumber(_ubranie.kamizelka)
+  if wartosc > 1 then
   --print(wartosc)
   hash = ("0x" .. glowna[wartosc])
   ladowanie(hash)
@@ -258,18 +259,21 @@ if sex == 1 then
   Wait(200)
   glowna = lista_spodnie
   wartosc = tonumber(_ubranie.spodnie)
+  if wartosc > 1 then
   --print(wartosc)
   hash = ("0x" .. glowna[wartosc])
   ladowanie(hash)
   --print("poszło4")
- 
+ end
   Wait(200)
   glowna = lista_buty
   wartosc = tonumber(_ubranie.buty)
+  if wartosc > 1 then
   --print(wartosc)
   hash = ("0x" .. glowna[wartosc])
   ladowanie(hash)
   --print("poszło6")
+  end
   Wait(200)
    glowna = lista_plaszcz
   wartosc = tonumber(_ubranie.plaszcz)
@@ -291,9 +295,6 @@ else
     hash = ("0x" .. glowna[wartosc])
     ladowanie(hash)
     --print("poszło5")
- else
-	Citizen.InvokeNative(0xD710A5007C2AC539, PlayerPedId(), 0x7505EF42, 0) -- Set target category, here the hash is for hats
-	Citizen.InvokeNative(0xCC8CA3E88256E58F, PlayerPedId(), 0, 1, 1, 1, 0) -- Actually remove the component
   end
   
   glowna = lista_kapelusze_f
@@ -307,14 +308,16 @@ else
   Wait(200)
   glowna = lista_koszula_f
   wartosc = tonumber(_ubranie.koszula)
+  if wartosc > 1 then
   --print(wartosc)
   hash = ("0x" .. glowna[wartosc])
   ladowanie(hash)
   --print("poszło2")
+  end
   Wait(200)
-  if wartosc > 1 then
   glowna = lista_kamizelka_f
   wartosc = tonumber(_ubranie.kamizelka)
+    if wartosc > 1 then
   --print(wartosc)
   hash = ("0x" .. glowna[wartosc])
   ladowanie(hash)
@@ -338,14 +341,15 @@ else
     ladowanie(hash)
     --print("poszło4")
   end
- 
   Wait(200)
   glowna = lista_buty_f
   wartosc = tonumber(_ubranie.buty)
+  if wartosc > 1 then
   --print(wartosc)
   hash = ("0x" .. glowna[wartosc])
   ladowanie(hash)
   --print("poszło6")
+  end
   Wait(200)
   glowna = lista_spodnica
   wartosc = tonumber(_ubranie.spodnica)
