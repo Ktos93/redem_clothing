@@ -1,4 +1,4 @@
-# redem_clothing 0.8V PRE-ALPHA
+# redem_clothing V 1.0 BETA
 
 ## 1. Requirements
 
@@ -27,6 +27,8 @@ You can use:
 ## 4. Credits
 [Ktos93](http://github.com/amakuu)
 
-[amakuu](http://github.com/amakuu) - Thanks for the redemrp_skin look
+[amakuu](http://github.com/amakuu) - Thanks for the redemrp_skin look and files with all Character components
+
+
 
 Join discord to get support! - https://discord.gg/FKH4uwb
