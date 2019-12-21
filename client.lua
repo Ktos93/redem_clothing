@@ -1,4 +1,3 @@
---[[To add clothes, copy the hash, paste it at the end of the list and add range in slider(_f means women Only MP components work)--]]
 
 local lista_kapelusze = {} --hat
 local lista_kapelusze_f = {}
