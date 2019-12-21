@@ -314,7 +314,7 @@ RegisterNUICallback('zmiana', function(wartosc)
     end
     Citizen.InvokeNative(0xCC8CA3E88256E58F, PlayerPedId(), 0, 1, 1, 1, 0) -- Actually remove the component
 
-    if glowna == lista_spodnie or lista_buty then
+    if glowna == lista_buty then
         Citizen.InvokeNative(0xD3A7B003ED343FD9, PlayerPedId(),tonumber(legs),true,true,true)
     elseif glowna == lista_spodnie_f or lista_buty_f then
         Citizen.InvokeNative(0xD3A7B003ED343FD9, PlayerPedId(),tonumber(legs2),true,true,true)
