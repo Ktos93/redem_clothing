@@ -7,7 +7,9 @@ rdr3_warning 'I acknowledge that this is a prerelease build of RedM, and I am aw
 ui_page 'html/h.html'
 
 client_scripts {
-    'client.lua'
+    'client.lua',
+	'mp_male.lua',
+	'mp_female.lua',
 } 
 
 files {
