@@ -12,7 +12,6 @@
 	<style type="text/css">
 		#mina {
 			display: none;
-			overflow: hidden;	
 		}
 		#skirt2 {
 		display: none;
@@ -33,7 +32,7 @@
 					if (item !== undefined && item.type === "ui") {		                
 						if (item.display === true) {
 		                  		    $("#mina").show();
-									document.getElementById("test9").value = 15;
+									document.getElementById("test9").value = 334;
 							if (item.sex3 === 2) {
 								var x = document.getElementById("skirt2");
 								x.style.display = "block";
@@ -48,7 +47,9 @@
 							var suwak6 = document.getElementById("test7");		
 							var suwak7 = document.getElementById("test8");	
 							var suwak8 = document.getElementById("test9");			
-							var suwak9 = document.getElementById("test10");									
+							var suwak9 = document.getElementById("test10");			
+							var suwak10 = document.getElementById("test11");		
+							var suwak11 = document.getElementById("test12");														
 							var wartosc = 1;	
 	
 						suwak.oninput = function() 
@@ -133,6 +134,27 @@
 								$.post('http:/redem_clothing/komponent', JSON.stringify(component));
 								$.post('http:/redem_clothing/zmiana', JSON.stringify(wartosc));
 								}
+								
+						suwak10.oninput = function() 
+								
+							{
+		
+								wartosc = this.value;
+								component = "rekawiczki";
+								document.getElementById('rekawiczki').innerHTML = this.value+"/166";
+								$.post('http:/redem_clothing/komponent', JSON.stringify(component));
+								$.post('http:/redem_clothing/zmiana', JSON.stringify(wartosc));
+								}
+						suwak11.oninput = function() 
+								
+							{
+		
+								wartosc = this.value;
+								component = "bandana";
+								document.getElementById('rekawiczki').innerHTML = this.value+"/258";
+								$.post('http:/redem_clothing/komponent', JSON.stringify(component));
+								$.post('http:/redem_clothing/zmiana', JSON.stringify(wartosc));
+								}
 						suwak8.oninput = function() 
 								
 							{
@@ -159,19 +181,23 @@
 			var maska1 = document.getElementById('test6').value;
 			var buty1 = document.getElementById('test7').value;
 			var plaszcz1 = document.getElementById('test10').value;
+			var rekawiczki1 = document.getElementById('test11').value;
+			var bandana1 = document.getElementById('test12').value;
 			if (sex === 2){
 				var spodnica1 = document.getElementById('test8').value;
-				$.post('http:/redem_clothing/Save', JSON.stringify({kapelusz: kapelusz1, koszula: koszula1, kamizelka: kamizelka1, spodnie: spodnie1, maska: maska1, buty: buty1, plaszcz: plaszcz1, spodnica: spodnica1}));
+				$.post('http:/redem_clothing/Save', JSON.stringify({kapelusz: kapelusz1, koszula: koszula1, kamizelka: kamizelka1, spodnie: spodnie1, maska: maska1, buty: buty1, plaszcz: plaszcz1, rekawiczki: rekawiczki1, bandana: bandana1, spodnica: spodnica1}));
 				$("#mina").hide();
 				}
 			else{
-				$.post('http:/redem_clothing/Save', JSON.stringify({kapelusz: kapelusz1, koszula: koszula1, kamizelka: kamizelka1, spodnie: spodnie1, maska: maska1, buty: buty1, plaszcz: plaszcz1}));
+				$.post('http:/redem_clothing/Save', JSON.stringify({kapelusz: kapelusz1, koszula: koszula1, kamizelka: kamizelka1, spodnie: spodnie1, maska: maska1, buty: buty1, plaszcz: plaszcz1, rekawiczki: rekawiczki1, bandana: bandana1}));
 				$("#mina").hide();
 				}
 		}
 		
-	
-		
+			function camera() {
+				$.post('http:/redem_clothing/Camera', JSON.stringify());	
+				
+		}
 	                
 		
 	</script>
@@ -180,7 +206,7 @@
 <div id="creator">
 <br>
 <div class="title">CLOTHES</div>
-
+<div class = "scroll">
 <div class="grubosc selector">
 HAT<label id="hat">1/586</label><br>
 <input type="range" name="points" min="1" max="586" value="1"class="slider" id="test2"><br>
@@ -202,14 +228,25 @@ MASK<label id="mask">1/79</label><br>
 
 BOOTS<label id="boots">1/426</label><br>
 <input type="range" name="points" min="1" max="426" value="1"class="slider" id="test7"><br>
+
+GLOVES<label id="rekawiczki">1/166</label><br>
+<input type="range" name="points" min="1" max="166" value="1"class="slider" id="test11"><br>
+
+BANDANA<label id="bandana">1/258</label><br>
+<input type="range" name="points" min="1" max="258" value="1"class="slider" id="test12"><br>
+
 <div id="skirt2"><label id="skirt">1/102</label>
 SKIRT<br>
 <input type="range" name="points" min="1" max="102" value="1"class="slider" id="test8"><br>
 </div>
+</div>
+</div>
+<div class="grubosc selector">
 HEADING<br>
 <input type="range" name="points" min="1" max="360" value="1" class="slider" id="test9"><br>
 </div>
 <div class="done">
+<input type="button" class="camera" value="DEF CAMERA" onclick="camera()">
 		<input type="button" class="submit" value="SAVE" onclick="Save()"><br>
 <br>
 

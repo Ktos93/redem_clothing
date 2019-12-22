@@ -1,3 +1,4 @@
+--[[To add clothes, copy the hash, paste it at the end of the list and add range in slider(_f means women Only MP components work)--]]
 
 local lista_kapelusze = {} --hat
 local lista_kapelusze_f = {}
@@ -20,7 +21,14 @@ local lista_buty_f = {}
 local lista_plaszcz = {} --coats
 local lista_plaszcz_f = {}
 ---------------------------------------
-local femaletorsos = {}
+local lista_rekawiczki = {}
+local lista_rekawiczki_f = {}
+
+local lista_bandana = {}
+local lista_bandana_f = {}
+--local lista_rekawiczki_f = {}
+
+local femaletorsos = {} 
 local femalelegs = {}
 
 local maletorsos = {}
@@ -31,7 +39,7 @@ local legs2 = nil
 local torso = nil
 local torso2 = nil
 
-local lista_spodnica = {} --skirt
+local lista_spodnica = {} --skirt 
 local adding2 = true
 local adding = true
 local glowna = lista_kapelusze
@@ -61,6 +69,10 @@ Citizen.CreateThread(function()
                 table.insert(maletorsos, v.Hash)
             elseif v.category == "legs" then
                 table.insert(malelegs, v.Hash)
+			elseif v.category == "gloves" then
+                table.insert(lista_rekawiczki, v.Hash)
+			elseif v.category == "neckwear" then
+                table.insert(lista_bandana, v.Hash)
             end
         end
         adding = false
@@ -93,6 +105,10 @@ Citizen.CreateThread(function()
                 table.insert(femaletorsos, v.hash)
             elseif v.category == "legs" then
                 table.insert(femalelegs, v.hash)
+			elseif v.category == "gloves" then
+                table.insert(lista_rekawiczki_f, v.hash)
+			elseif v.category == "neckwear" then
+                table.insert(lista_bandana_f, v.hash)
             else end
         end
         adding2 = false
@@ -154,7 +170,7 @@ AddEventHandler('redem_clothing:sex', function(skin)
     end
     startUI(sex)
     SetNuiFocus(true, true)
-    camera()
+    camera(3.1,-0.15)
 
 
 end)
@@ -202,7 +218,9 @@ RegisterNUICallback('Save', function(data, cb)
         ["maska"] = data.maska,
         ["buty"] = data.buty,
         ["spodnica"] = data.spodnica,
-        ["plaszcz"] = data.plaszcz
+        ["plaszcz"] = data.plaszcz,
+		["rekawiczki"] = data.rekawiczki,
+		["bandana"] = data.bandana
 
     }
     --print("tak1")
@@ -219,42 +237,73 @@ RegisterNUICallback('Save', function(data, cb)
     --	print("tak2")
 end)
 
+RegisterNUICallback('Camera', function()
+camera(3.1,-0.15)
+end)
+
 
 RegisterNUICallback('komponent', function(component)
     if sex_global == 1 then
         if component == "kapelusz" then
             glowna = lista_kapelusze
+			camera(1.5,0.4)
         elseif component == "koszula" then
             glowna = lista_koszula
+			 camera(1.8,0.1)
         elseif component == "kamizelka" then
             glowna = lista_kamizelka
+			camera(1.8,0.1)
         elseif component == "spodnie" then
             glowna = lista_spodnie
+			camera(2.2,-0.3)
         elseif component == "maska" then
             glowna = lista_maska
+			camera(1.5,0.4)
         elseif component == "buty" then
             glowna = lista_buty
+			camera(1.8,-0.6)
         elseif component == "plaszcz" then
             glowna = lista_plaszcz
+			camera(2.5,0.1)
+		elseif component == "rekawiczki" then
+            glowna = lista_rekawiczki
+			camera(1.8,-0.3)
+		elseif component == "bandana" then
+            glowna = lista_bandana
+			camera(1.5,0.4)
         end
 
     elseif sex_global == 2 then
         if component == "kapelusz" then
             glowna = lista_kapelusze_f
+			camera(1.5,0.4)
         elseif component == "koszula" then
             glowna = lista_koszula_f
+			 camera(1.8,0.1)
         elseif component == "kamizelka" then
             glowna = lista_kamizelka_f
+			camera(1.8,0.1)
         elseif component == "spodnie" then
             glowna = lista_spodnie_f
+			camera(2.2,-0.3)
         elseif component == "maska" then
             glowna = lista_maska_f
+			camera(1.5,0.4)
         elseif component == "buty" then
             glowna = lista_buty_f
+			camera(1.8,-0.6)
         elseif component == "spodnica" then
             glowna = lista_spodnica
+			camera(2.2,-0.3)
         elseif component == "plaszcz" then
             glowna = lista_plaszcz_f
+				camera(2.5,0.1)
+		elseif component == "rekawiczki" then
+            glowna = lista_rekawiczki_f
+			camera(1.8,-0.3)
+		elseif component == "bandana" then
+            glowna = lista_bandana_f
+			camera(1.5,0.4)
 
         end
     end
@@ -290,7 +339,15 @@ RegisterNUICallback('zmiana', function(wartosc)
 
         Citizen.InvokeNative(0xD710A5007C2AC539, PlayerPedId(), 0x7505EF42, 0) -- Set target category, here the hash is for hats
         --  Citizen.InvokeNative(0xCC8CA3E88256E58F, PlayerPedId(), 0, 1, 1, 1, 0) -- Actually remove the component
-
+		
+	elseif (glowna == lista_rekawiczki or glowna == lista_rekawiczki_f) and wartosc2 == 1 then
+        Citizen.InvokeNative(0xD710A5007C2AC539, PlayerPedId(), 0xEABE0032, 0) -- Set target category, here the hash is for hats
+        --  Citizen.InvokeNative(0xCC8CA3E88256E58F, PlayerPedId(), 0, 1, 1, 1, 0) -- Actually remove the component
+		
+	elseif (glowna == lista_bandana or glowna == lista_bandana_f) and wartosc2 == 1 then
+        Citizen.InvokeNative(0xD710A5007C2AC539, PlayerPedId(), 0x5FC29285, 0) -- Set target category, here the hash is for hats
+        --  Citizen.InvokeNative(0xCC8CA3E88256E58F, PlayerPedId(), 0, 1, 1, 1, 0) -- Actually remove the component
+		
     elseif (glowna == lista_kapelusze_f or glowna == lista_kapelusze) and wartosc2 == 1 then
         Citizen.InvokeNative(0xD710A5007C2AC539, PlayerPedId(), 0x9925C067, 0) -- Set target category, here the hash is for hats
         --   Citizen.InvokeNative(0xCC8CA3E88256E58F, PlayerPedId(), 0, 1, 1, 1, 0) -- Actually remove the component
@@ -312,6 +369,8 @@ RegisterNUICallback('zmiana', function(wartosc)
         Citizen.InvokeNative(0xD3A7B003ED343FD9 , PlayerPedId(),  tonumber(hash), true, true, true)
     end
     Citizen.InvokeNative(0xCC8CA3E88256E58F, PlayerPedId(), 0, 1, 1, 1, 0) -- Actually remove the component
+
+
 
     if glowna == lista_buty then
         Citizen.InvokeNative(0xD3A7B003ED343FD9, PlayerPedId(),tonumber(legs),true,true,true)
@@ -422,6 +481,25 @@ AddEventHandler('redem_clothing:load', function(skin, ubranie)
             ladowanie(hash)
             --print("poszło6")
         end
+		
+		 Wait(300)
+        glowna = lista_rekawiczki
+        wartosc = tonumber(_ubranie.rekawiczki)
+        if wartosc > 1 then
+            --print(wartosc)
+            hash = ("0x" .. glowna[wartosc])
+            ladowanie(hash)
+            --print("poszło6")
+        end
+		 Wait(300)
+        glowna = lista_bandana
+        wartosc = tonumber(_ubranie.bandana)
+        if wartosc > 1 then
+            --print(wartosc)
+            hash = ("0x" .. glowna[wartosc])
+            ladowanie(hash)
+            --print("poszło6")
+        end
     else
 
 
@@ -498,6 +576,24 @@ AddEventHandler('redem_clothing:load', function(skin, ubranie)
             ladowanie(hash)
             --print("poszło7")
         end
+		 Wait(300)
+        glowna = lista_rekawiczki_f
+        wartosc = tonumber(_ubranie.rekawiczki)
+        if wartosc > 1 then
+            --print(wartosc)
+            hash = ("0x" .. glowna[wartosc])
+            ladowanie(hash)
+            --print("poszło6")
+        end
+		 Wait(300)
+        glowna = lista_bandana_f
+        wartosc = tonumber(_ubranie.bandana)
+        if wartosc > 1 then
+            --print(wartosc)
+            hash = ("0x" .. glowna[wartosc])
+            ladowanie(hash)
+            --print("poszło6")
+        end
     end
 end)
 --------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -532,17 +628,18 @@ end
 function destory()
     SetCamActive(cam, false)
     RenderScriptCams(false, true, 500, true, true)
-    cam = nil
     DisplayHud(true)
     DisplayRadar(true)
+	DestroyAllCams(true)
 end
 
-function camera()
+function camera(zoom, offset)
+DestroyAllCams(true)
     local playerPed = PlayerPedId()
     local coords    = GetEntityCoords(playerPed)
-    local heading = 90.0
-    local zoomOffset = 3.0
-    local camOffset = -0.06
+    local heading = 45.0
+    local zoomOffset = zoom
+    local camOffset = offset
     local angle = heading * math.pi / 180.0
     local theta = {
         x = math.cos(angle),
@@ -573,11 +670,11 @@ function camera()
     }
     print(posToLook.x)
 
-    SetEntityHeading(playerPed, 15.00)
-    cam = CreateCamWithParams("DEFAULT_SCRIPTED_CAMERA", pos.x, pos.y, coords.z + camOffset, 300.00,0.00,0.00, 40.00, false, 0)
+    SetEntityHeading(playerPed, 334.00)
+    cam = CreateCamWithParams("DEFAULT_SCRIPTED_CAMERA", pos.x-0.6, pos.y, coords.z + camOffset, 300.00,0.00,0.00, 40.00, false, 0)
     PointCamAtCoord(cam, posToLook.x, posToLook.y, coords.z + camOffset)
     SetCamActive(cam, true)
-    RenderScriptCams(true, false, 1, true, true)
+    RenderScriptCams(true, true, 500, true, true)
     DisplayHud(false)
     DisplayRadar(false)
 end
